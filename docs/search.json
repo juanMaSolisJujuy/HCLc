@@ -1,0 +1,177 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Muestreo espacial: Hipercubo Latino condicionado",
+    "section": "",
+    "text": "Este recurso constituye la actividad propuesta del último módulo del Curso de Extensión “Herramientas estadísticas para el diseño muestral de un inventario forestal”, aprobado por Resolución CAFCA N 929/2023, dictado durante los meses de noviembre y diciembre de 2023 en la Facultad de Ciencias Agrarias de la Universidad Nacional de Jujuy."
+  },
+  {
+    "objectID": "index.html#objetivos",
+    "href": "index.html#objetivos",
+    "title": "Muestreo espacial: Hipercubo Latino condicionado",
+    "section": "Objetivos",
+    "text": "Objetivos\n\nObtener capas raster de ejemplo para la construcción de una capa estratificada de base para el muestreo.\nRealizar un muestreo de tipo Hipercubo latino condicionado (HCLc) con un tamaño muestral pre-definido para el macizo boscoso de la Finca Severino, de la FCA UNJu.\nVisualizar los puntos muestrales en una composición.\n\n\n\n\n\n\n\nNota\n\n\n\nEsta clase trata de desarrollar un ejemplo de aplicación de muestreo espacial HCLc mediante el uso combinado de diferentes herramientas de análisis. No constituye un tratamiento formal y en profundidad de los conceptos que subyacen en cada uno de los métodos aplicados."
+  },
+  {
+    "objectID": "index.html#plataformas",
+    "href": "index.html#plataformas",
+    "title": "Muestreo espacial: Hipercubo Latino condicionado",
+    "section": "Plataformas",
+    "text": "Plataformas\nPara realizar la actividad se utilizarán tres plataformas de código libre y gratuitas:\n\nQGIS 3, cuya versión más reciente es la 3.36, descargable desde aquí.\nR, cuya versión más reciente es la 4.3.3, descargable desde aquí.\nGoogle Earth Engine (GEE), accesible desde aquí."
+  },
+  {
+    "objectID": "index.html#etapas",
+    "href": "index.html#etapas",
+    "title": "Muestreo espacial: Hipercubo Latino condicionado",
+    "section": "Etapas",
+    "text": "Etapas\nLa actividad consta de las siguientes etapas:\n\nCreación de una carpeta de trabajo y creación de un proyecto QGIS.\nDescarga de una capa DEM (Modelo Digital de Elevación) de tipo ráster desde IDERA, a partir de la cual se construirán dos capas bases: curvas de nivel y pendientes, utilizando el programa QGIS.\nObtención de una capa raster de cobertura, a partir de una composición especificada desde GEE.\nDelimitación de las capas bases con el lote a muestrear.\n“Apilamiento” de las capas bases y muestreo Hipercubo Latino, utilizando el programa R.\nVisualización de los puntos muestrales en el programa QGIS."
+  },
+  {
+    "objectID": "index.html#responsables",
+    "href": "index.html#responsables",
+    "title": "Muestreo espacial: Hipercubo Latino condicionado",
+    "section": "Responsables",
+    "text": "Responsables\n\nIng. Agr. Juan Manuel Solís, juanmasolis@fca.unju.edu.ar\nDr. Cristian Humano, cahumano@fca.unju.edu.ar\nIng. Forestal Julián Quispe, quispejulian@fca.unju.edu.ar"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "04_Etapa_4.html",
+    "href": "04_Etapa_4.html",
+    "title": "Delimitación de las capas bases con el lote a muestrear.",
+    "section": "",
+    "text": "Al importar el archivo severino.kml en QGIS, se importaron 3 capas: lotes, monte y represa. Es necesario combinar las tres capas a fin de obtener una única entidad. Para ello, seleccionar Vectorial &gt;&gt; Herramientas de gestión de datos &gt;&gt; Combinar capas vectoriales. Aparecerá la ventana Combinar capas vectoriales. Se debe pulsar el ícono de 3 puntos en Capa de entrada y seleccionar las tres capas espaciales, que están identificadas por el SRC EPSG 4326, y luego Ejecutar. En el panel de capas, aparecerá una nueva capa temporal con el nombre Combinado. La guardaremos en nuestra carpeta de trabajo de la siguiente manera: seleccionar la capa “Combinado” haciendo un click sobre ella en el panel de capas. Sin deseleccionar la capa, en el menú superior Capa seleccionar Guardar como. Seleccionar el formato kml, y en nombre del archivo, seleccionar la ubicación en el directorio y el nombre del polígono, por ejemplo, severino_lote.kml. Luego Aceptar y Añadir capas."
+  },
+  {
+    "objectID": "04_Etapa_4.html#unión-de-capas-vectoriales-del-predio-severino",
+    "href": "04_Etapa_4.html#unión-de-capas-vectoriales-del-predio-severino",
+    "title": "Delimitación de las capas bases con el lote a muestrear.",
+    "section": "",
+    "text": "Al importar el archivo severino.kml en QGIS, se importaron 3 capas: lotes, monte y represa. Es necesario combinar las tres capas a fin de obtener una única entidad. Para ello, seleccionar Vectorial &gt;&gt; Herramientas de gestión de datos &gt;&gt; Combinar capas vectoriales. Aparecerá la ventana Combinar capas vectoriales. Se debe pulsar el ícono de 3 puntos en Capa de entrada y seleccionar las tres capas espaciales, que están identificadas por el SRC EPSG 4326, y luego Ejecutar. En el panel de capas, aparecerá una nueva capa temporal con el nombre Combinado. La guardaremos en nuestra carpeta de trabajo de la siguiente manera: seleccionar la capa “Combinado” haciendo un click sobre ella en el panel de capas. Sin deseleccionar la capa, en el menú superior Capa seleccionar Guardar como. Seleccionar el formato kml, y en nombre del archivo, seleccionar la ubicación en el directorio y el nombre del polígono, por ejemplo, severino_lote.kml. Luego Aceptar y Añadir capas."
+  },
+  {
+    "objectID": "04_Etapa_4.html#corte-de-capas-raster-que-serán-apiladas.",
+    "href": "04_Etapa_4.html#corte-de-capas-raster-que-serán-apiladas.",
+    "title": "Delimitación de las capas bases con el lote a muestrear.",
+    "section": "Corte de capas raster que serán “apiladas”.",
+    "text": "Corte de capas raster que serán “apiladas”.\nRealizaremos la importación de las dos capas raster obtenidas hasta ahora: el archivo 2566-11.zip (con el DEM obtenido de IDERA) y el archivo Severino_Sentinel2_30.tif, obtenido de GEE. En ambos casos, seleccionar Capa &gt;&gt; Añadir capa &gt;&gt; Añadir capa raster. En la ventana Administrador de fuentes de datos | Raster, hacer click en el ícono de Fuente y seleccionar el primer archivo. A continuación, repetir el procedimiento, seleccionado el segundo archivo.\nPara realizar el “corte” de la capa DEM, seleccionar Ráster &gt;&gt; Extracción &gt;&gt; Cortar ráster por capa de máscara… En la capa de entrada, seleccionar la capa ráster 2566-11.img. En la capa de máscara, seleccionar el polígono severino_completo. Luego Ejecutar. Aparecerá una capa temporal llamada Cortado (máscara), que deberemos guardar en la carpeta de trabajo, por ejemplo, con el nombre DEM_severino.tif. Luego repetir el procedimiento con la otra capa ráster, nombrándola sentinel_severino.tif."
+  },
+  {
+    "objectID": "04_Etapa_4.html#creación-de-capa-de-pendientes.",
+    "href": "04_Etapa_4.html#creación-de-capa-de-pendientes.",
+    "title": "Delimitación de las capas bases con el lote a muestrear.",
+    "section": "Creación de capa de pendientes.",
+    "text": "Creación de capa de pendientes.\nPara la extracción de pendientes, seleccionar Ráster &gt;&gt; Análisis &gt;&gt; Pendiente. En Capa de entrada seleccionar la capa DEM_severino, y las opciones Pendiente expresada en porcentaje en vez de grados y procesar border. Aparecerá una capa temporal que deberemos guardar en la carpeta de trabajo según se vió anteriormente, por ejemplo con el nombre pt_severino.tif."
+  },
+  {
+    "objectID": "02_Etapa_2.html",
+    "href": "02_Etapa_2.html",
+    "title": "Descarga de una capa DEM (Modelo Digital de Elevación)",
+    "section": "",
+    "text": "Los archivos DEM o Modelos Digitales de Elevación, son archivos de tipo imagen con información acerca de la elevación de la superficie terrestre que permite describir la topografía del terreno a través de puntos distribuidos en forma homogénea sobre la superficie terrestre y cuya altura está referida al nivel medio del mar.\nEstos archivos están están disponibles en diversos repositorios especializados. Por ejemplo, la plataforma de Infraestructura de Datos Espaciales de la República Argentina (IDERA) es una iniciativa que, desde 2007, busca coordinar y facilitar el acceso a datos geoespaciales en Argentina sobre la base de la cooperación y el servicio a la comunidad, y que está integrada, mediante una adhesión voluntaria, por los organismos de diferentes jurisdicciones (nacionales, provinciales y municipales), consejos federales, consejos o colegios profesionales, universidades, organismos no gubernamentales y empresas de todo el país.\nLos archivos DEM son imágenes que, en IDERA, presentan extendión .img, y constituyen archivos ráster, georeferenciados utilizado es el WGS84 - EPSG 4326.\nEn IDERA, actualmente los DEM se presentan con diferentes resoluciones: 30m, 5m y 0,5m. Por ejemplo, en un DEM con resolución 30m, cada píxel representa un área de 30 x 30 m2."
+  },
+  {
+    "objectID": "02_Etapa_2.html#archivos-dem",
+    "href": "02_Etapa_2.html#archivos-dem",
+    "title": "Descarga de una capa DEM (Modelo Digital de Elevación)",
+    "section": "",
+    "text": "Los archivos DEM o Modelos Digitales de Elevación, son archivos de tipo imagen con información acerca de la elevación de la superficie terrestre que permite describir la topografía del terreno a través de puntos distribuidos en forma homogénea sobre la superficie terrestre y cuya altura está referida al nivel medio del mar.\nEstos archivos están están disponibles en diversos repositorios especializados. Por ejemplo, la plataforma de Infraestructura de Datos Espaciales de la República Argentina (IDERA) es una iniciativa que, desde 2007, busca coordinar y facilitar el acceso a datos geoespaciales en Argentina sobre la base de la cooperación y el servicio a la comunidad, y que está integrada, mediante una adhesión voluntaria, por los organismos de diferentes jurisdicciones (nacionales, provinciales y municipales), consejos federales, consejos o colegios profesionales, universidades, organismos no gubernamentales y empresas de todo el país.\nLos archivos DEM son imágenes que, en IDERA, presentan extendión .img, y constituyen archivos ráster, georeferenciados utilizado es el WGS84 - EPSG 4326.\nEn IDERA, actualmente los DEM se presentan con diferentes resoluciones: 30m, 5m y 0,5m. Por ejemplo, en un DEM con resolución 30m, cada píxel representa un área de 30 x 30 m2."
+  },
+  {
+    "objectID": "02_Etapa_2.html#descarga",
+    "href": "02_Etapa_2.html#descarga",
+    "title": "Descarga de una capa DEM (Modelo Digital de Elevación)",
+    "section": "Descarga",
+    "text": "Descarga\nMediante las Herramientas de Búsqueda de IDERA, es posible realizar una búsqueda de archivos DEM por medio de una serie de filtros. En nuestro caso, vamos a realizar la siguiente secuencia de selección:\n\nSeleccionar la opción PROVINCIA, DEPARTAMENTO / PARTIDO.\nEn Provincia, seleccionar Jujuy. En Departamento, seleccionar EL CARMEN. En tipo de producto, vamos a dejar seleccionada la opción Todas. Finalmente, copiar el código de seguridad en la caja correspondiente y presionar Buscar.\n\nA continuación aparecerá un listado de archivos DEM disponibles con diferentes resoluciones. Cada archivo corresponde a un sector dentro del área filtrada en el paso anterior. Deberemos descargar el sector que coincida con la ubicación del predio de Finca Severino, que es el archivo mdear_v2.1_30m con el código 2566-11.img, con una resolución de 30m."
+  },
+  {
+    "objectID": "01_Etapa_1.html",
+    "href": "01_Etapa_1.html",
+    "title": "Primeros Pasos",
+    "section": "",
+    "text": "En todo proyecto que se inicie, es recomendable crear una carpeta de trabajo a fin de incluir en ella todos los archivos que serán utilizados. De esta forma se llevará un mejor control del proyecto, además de que se simplificarán muchas de las operaciones que se realicen. Por ejemplo, en la carpeta Documentos (usualmente dentro de la ruta C:/Users/usuario) crearemos la carpeta HCL. En ella guardaremos todos los archivos que utilicemos en el proyecto. Por ejemplo, dentro de HCL podemos crear una nueva carpeta llamada CAPAS, dentro de la cual iremos guardando todos los archivos vectoriales y raster. Inicialmente, guardaremos el archivo vectorial severino.kml, que contiene un polígono con los límites del predio de la Finca Severino."
+  },
+  {
+    "objectID": "01_Etapa_1.html#creación-de-la-carpeta-de-trabajo",
+    "href": "01_Etapa_1.html#creación-de-la-carpeta-de-trabajo",
+    "title": "Primeros Pasos",
+    "section": "",
+    "text": "En todo proyecto que se inicie, es recomendable crear una carpeta de trabajo a fin de incluir en ella todos los archivos que serán utilizados. De esta forma se llevará un mejor control del proyecto, además de que se simplificarán muchas de las operaciones que se realicen. Por ejemplo, en la carpeta Documentos (usualmente dentro de la ruta C:/Users/usuario) crearemos la carpeta HCL. En ella guardaremos todos los archivos que utilicemos en el proyecto. Por ejemplo, dentro de HCL podemos crear una nueva carpeta llamada CAPAS, dentro de la cual iremos guardando todos los archivos vectoriales y raster. Inicialmente, guardaremos el archivo vectorial severino.kml, que contiene un polígono con los límites del predio de la Finca Severino."
+  },
+  {
+    "objectID": "01_Etapa_1.html#creación-del-proyecto-qgis",
+    "href": "01_Etapa_1.html#creación-del-proyecto-qgis",
+    "title": "Primeros Pasos",
+    "section": "Creación del Proyecto QGIS",
+    "text": "Creación del Proyecto QGIS\nUna vez creada la carpeta de Trabajo, abriremos el programa QGIS 3 y crearemos el proyecto de trabajo. Básicamente, un proyecto QGIS en un archivo con extensión .qgs que almacena referencias, ajustes y diferentes configuraciones sobre mapas creados con QGIS.\nPara ello, en el menú Proyecto seleccionaremos la opción Nuevo, y se abrirá un entorno nuevo o lienzo (canvas) en blanco. Antes de comenzar a trabajar, es necesario guardarlo en la carpeta de trabajo. Seleccionar Proyectos y luego Guardar como …, seleccionar la carpeta de trabajo recientemente creada, asignarle el nombre HCL (o el que se prefiera), y presionar Guardar.\nAhora es posible comenzar a importar archivos y trabajar con ellos. Por ejemplo, para importar el archivo severino.kml, se debe seleccionar Capa &gt;&gt; Añadir capa &gt;&gt; Añadir capa vectorial …, y aparecerá la ventana emergente Administrador de fuentes de datos | Vector. En el selector Fuente seleccionar el ícono para abrir (indicado con tres puntos), buscar el archivo en nuestra carpeta de trabajo y seleccionarlo. Aparecerá una nueva ventana llamada Select items to add. Seleccionar las opciones Seleccionar todo y luego Añadir capas. Finalmente, presionar Cerrar.\nEn la esquina inferior derecha se puede observar que el sistema de referencias es el EPSG 4326.\nCon el complemento QuickMapServices es posible añadir una capa base de diferentes proveedores, como ser Google Maps."
+  },
+  {
+    "objectID": "03_Etapa_3.html",
+    "href": "03_Etapa_3.html",
+    "title": "Obtención de una capa raster de cobertura a partir de GEE.",
+    "section": "",
+    "text": "Google Earth Engine (GEE) es una plataforma en la nube desarrollada por Google que proporciona acceso y capacidades de análisis para vastas cantidades de datos geoespaciales y de teledetección, que utiliza un lenguaje de programación propio llamado “Earth Engine JavaScript API”.\nPara poder acceder al entorno de trabajo de GEE, en el menú Platform del (sitio web de la aplicación), seleccionar Code editor. Se le pedirá que elija una cuenta de Google para registrarse y … listo! ya ha accedido al editor de código de GEE.\nNo es propósito de este curso profundizar sobre GEE. Sin embargo, quienes estén interesados en introducirse en esta poderosa plataforma, se recomienda enfáticamente el curso Google Earth Engine desde cero, de Yanina Bellini Saibene (2022).\nEn el panel Script Manager, al que se acceder desde la solapa Scripts (arriba a la derecha), crearemos un nuevo proyecto al que llamaremos HCL, presionando el botón rojo NEW &gt;&gt; Repository e ingresando el valor HCL en la casilla correspondiente. Luego, presionar Create. Aparecerá el nombre del repositorio recientemente creado como una dependencia dentro de Owner. A continuación, crearemos un nuevo archivo que contendrá las instrucciones para descargar una capa de cobertura. Para ello, habiendo seleccionado el repositorio HCL, seleccionaremos nuevamente NEW, esta vez seguido de la opción File, al que también llamaremos HCL. Luego, presionar Ok."
+  },
+  {
+    "objectID": "03_Etapa_3.html#primeros-pasos",
+    "href": "03_Etapa_3.html#primeros-pasos",
+    "title": "Obtención de una capa raster de cobertura a partir de GEE.",
+    "section": "",
+    "text": "Google Earth Engine (GEE) es una plataforma en la nube desarrollada por Google que proporciona acceso y capacidades de análisis para vastas cantidades de datos geoespaciales y de teledetección, que utiliza un lenguaje de programación propio llamado “Earth Engine JavaScript API”.\nPara poder acceder al entorno de trabajo de GEE, en el menú Platform del (sitio web de la aplicación), seleccionar Code editor. Se le pedirá que elija una cuenta de Google para registrarse y … listo! ya ha accedido al editor de código de GEE.\nNo es propósito de este curso profundizar sobre GEE. Sin embargo, quienes estén interesados en introducirse en esta poderosa plataforma, se recomienda enfáticamente el curso Google Earth Engine desde cero, de Yanina Bellini Saibene (2022).\nEn el panel Script Manager, al que se acceder desde la solapa Scripts (arriba a la derecha), crearemos un nuevo proyecto al que llamaremos HCL, presionando el botón rojo NEW &gt;&gt; Repository e ingresando el valor HCL en la casilla correspondiente. Luego, presionar Create. Aparecerá el nombre del repositorio recientemente creado como una dependencia dentro de Owner. A continuación, crearemos un nuevo archivo que contendrá las instrucciones para descargar una capa de cobertura. Para ello, habiendo seleccionado el repositorio HCL, seleccionaremos nuevamente NEW, esta vez seguido de la opción File, al que también llamaremos HCL. Luego, presionar Ok."
+  },
+  {
+    "objectID": "03_Etapa_3.html#descarga-de-una-capa-raster-vectorial",
+    "href": "03_Etapa_3.html#descarga-de-una-capa-raster-vectorial",
+    "title": "Obtención de una capa raster de cobertura a partir de GEE.",
+    "section": "Descarga de una capa raster vectorial",
+    "text": "Descarga de una capa raster vectorial\nDentro del archivo HCL, deberemos correr el siguiente código:\n\n\n\n\n\n\nCódigo GEE\n\n\n\n// DEFINIR EL OBJETO poligono DE CORTE\n// 1. Carga de imagen Sentinel 2A\nvar image = ee.ImageCollection(‘COPERNICUS/S2_SR’) .filterDate(‘2020-01-01’, ‘2023-12-11’)\n.filter(ee.Filter.lt(‘CLOUDY_PIXEL_PERCENTAGE’, 1))\n.filterBounds(poligono)\n.median();\n// 2. Parámetros de visualización\nvar visParamsTrue = {bands: [‘B4’, ‘B3’, ‘B2’], min: 0, max: 2500, gamma: 1.1};\nMap.addLayer(image, visParamsTrue, “Sentinel 2A”);\nMap.addLayer(image.clip(poligono), visParamsTrue, “StudyArea”);\nMap.centerObject(poligono, 10);\n// 3. Exportación a Drive\nExport.image.toDrive({ image: image.int16(), description: ‘Sentinel2_30’, scale: 30, region: poligono, maxPixels: 1e13 });\n\n\n\nDescripción del código\nEl código anterior realiza varias operaciones para trabajar con imágenes Sentinel-2A (con una resolución de 30m) y luego exportar la salida a una carpeta de Google Drive.\n\nDefinir el objeto polígono de corte\nNo forma parte del código propiamente dicho. Consiste en delimitar una región de análisis manualmente, de forma tal que dicha región contenga olgadamente al polígono de la Finca Severino. Una vez delimitado el polígono, lo llamaremos simplemente polígono.\n\n\nCarga de Imágenes Sentinel-2A:\nA continuación se describe la secuencia de sentencias empleadas para la carga de imágenes de Sentinel-2A:\n\nCarga de banco de imágenes de contiene a la serie de Sentinel-2A del conjunto de datos ‘COPERNICUS/S2_SR’, con la función ee.ImageCollection.\nFiltros de fecha (‘2020-01-01’ hasta ‘2023-12-11’) y de porcentaje de píxeles nublados menor al 1% para seleccionar imágenes sin nubosidad.\nFiltro de imágenes dentro del área definida por el objeto polígono.\nCálculo de la mediana de las imágenes seleccionadas para obtener una única imagen representativa.\n\n\n\nVisualización en el Mapa:\n\nDefinición de parámetros de visualización (visParamsTrue): selección de bandas RGB de la imagen Sentinel-2A, ajuste de luminosidad de la imagen con el argumento gamma, y los valores mínimos y máximos de las bandas de la imagen.\nAdición de la imagen al mapa utilizando Map.addLayer, tanto a escala completa como recortada a la región definida por poligono.\nCentrado del mapa en la región de interés (poligono) con un nivel de zoom de 10.\n\n\n\nExportación a Google Drive:\n\nExportación de la imagen procesada a Google Drive utilizando Export.image.toDrive.\nLa imagen se convierte a valores enteros (.int16()). Se especifica una descripción para el archivo de salida (‘Sentinel2_30’), la escala de 30 metros por píxel, la región a exportar (poligono), y un límite máximo de píxeles (1e13)."
+  },
+  {
+    "objectID": "05_Etapa_5.html",
+    "href": "05_Etapa_5.html",
+    "title": "Muestreo Hipercubo Latino Condicionado, utilizando el programa R.",
+    "section": "",
+    "text": "El muestreo hipercubo latino condicional HCLc es un tipo de muestreo espacial estratificado que utiliza diferentes variables auxiliares para obtener una distribución más eficiente y representativa de los puntos muestrales, ya que permite capturar la variabilidad del entorno que se está relevando. El muestreo HCLc es de tipo dirijido, es decir, no es un muestreo probabilístico ya que no se conoce a priori la probabilidad de selección de los puntos muestrales. Dados N sitios con información multidimensional, HCLc selecciona una muestra tal que existan representantes de todos los intervalos de clase de las distribuciones marginales que componen la distribución multivariada (Minasny & McBratney, 2006, citado por Paccioretti et al, 2020).\nPara ejemplificar el modelo, supongamos que contamos con dos variables auxiliares o estratos que, a fin de simplificar, presentan cuatro niveles o valores cada uno. El procedimiento de asignación de puntos muestrales se realiza de forma tal que a cada intersección del diseño 4x4 corresponde una única observación, de forma tal que todos los niveles están marginalmente representados. El ejemplo descrito corresponde a un cuadrado latino, ya que contiene dos dimensiones.\n\n\n\n\n\nEl término hipercubo latino es una extensión del diseño cuadrado latino a más dimensiones. HCLc, es un esquema de muestreo de Monte Carlo que utiliza un procedimiento aleatorio estratificado que proporciona una forma eficiente de muestrear variables de sus distribuciones multivariadas (McKay et al., 1979). Es la generalización de este concepto a un número arbitrario de dimensiones (K), donde cada unidad de muestreo es la única en cada hiperplano alineado con el eje que la contiene. Implica muestrear n valores de la distribución prescrita para cada una de las variables. La distribución acumulativa de cada variable se divide en n intervalos equiprobables, y se selecciona aleatoriamente un valor de cada intervalo. Los n valores obtenidos para cada variable se emparejan luego con las otras variables."
+  },
+  {
+    "objectID": "05_Etapa_5.html#muestreo-espacial-hipercubo-latino",
+    "href": "05_Etapa_5.html#muestreo-espacial-hipercubo-latino",
+    "title": "Muestreo Hipercubo Latino Condicionado, utilizando el programa R.",
+    "section": "",
+    "text": "El muestreo hipercubo latino condicional HCLc es un tipo de muestreo espacial estratificado que utiliza diferentes variables auxiliares para obtener una distribución más eficiente y representativa de los puntos muestrales, ya que permite capturar la variabilidad del entorno que se está relevando. El muestreo HCLc es de tipo dirijido, es decir, no es un muestreo probabilístico ya que no se conoce a priori la probabilidad de selección de los puntos muestrales. Dados N sitios con información multidimensional, HCLc selecciona una muestra tal que existan representantes de todos los intervalos de clase de las distribuciones marginales que componen la distribución multivariada (Minasny & McBratney, 2006, citado por Paccioretti et al, 2020).\nPara ejemplificar el modelo, supongamos que contamos con dos variables auxiliares o estratos que, a fin de simplificar, presentan cuatro niveles o valores cada uno. El procedimiento de asignación de puntos muestrales se realiza de forma tal que a cada intersección del diseño 4x4 corresponde una única observación, de forma tal que todos los niveles están marginalmente representados. El ejemplo descrito corresponde a un cuadrado latino, ya que contiene dos dimensiones.\n\n\n\n\n\nEl término hipercubo latino es una extensión del diseño cuadrado latino a más dimensiones. HCLc, es un esquema de muestreo de Monte Carlo que utiliza un procedimiento aleatorio estratificado que proporciona una forma eficiente de muestrear variables de sus distribuciones multivariadas (McKay et al., 1979). Es la generalización de este concepto a un número arbitrario de dimensiones (K), donde cada unidad de muestreo es la única en cada hiperplano alineado con el eje que la contiene. Implica muestrear n valores de la distribución prescrita para cada una de las variables. La distribución acumulativa de cada variable se divide en n intervalos equiprobables, y se selecciona aleatoriamente un valor de cada intervalo. Los n valores obtenidos para cada variable se emparejan luego con las otras variables."
+  },
+  {
+    "objectID": "05_Etapa_5.html#apilamiento-o-stacks-de-capas",
+    "href": "05_Etapa_5.html#apilamiento-o-stacks-de-capas",
+    "title": "Muestreo Hipercubo Latino Condicionado, utilizando el programa R.",
+    "section": "Apilamiento o “stacks” de capas",
+    "text": "Apilamiento o “stacks” de capas\nEn esta etapa vamos a trabajar con R. Previamente vamos instalar las librerías que utilizaremos:\n\ninstall.packages(\"sf\")\ninstall.packages(\"rgdal\")\ninstall.packages(\"raster\")\ninstall.packages(\"clhs\")\ninstall.packages(\"tidyverse\")\n\nRecordar que la instalación de librerías se realiza solo una vez. Una vez instaladas, es posible utilizar sus funciones invocándolas con la función library():\n\nlibrary(sf)\nlibrary(rgdal)\nlibrary(raster)\nlibrary(clhs)\nlibrary(tidyverse)\n\nUna práctica muy útil suele ser guardar la referencia de la ruta de trabajo para facilitar las referencias. Por ejemplo:\n\nruta = \"C:/Users/usuario/Documents/HCL/CAPAS/\"\n\nDe esta forma, ya sabemos que al utilizar la referencia “ruta”, se hace referencia a la sub-carpeta “CAPAS” de la carpeta “HCL”.\nEl primer paso será cargar el polígono del predio de la finca Severino, como así también las capas raster.\n\nlote=st_read(paste0(ruta,\"severino_lote.kml\"))\npt = raster(paste0(ruta,\"pt_severino.tif\")) ## CAPA DE PENDIENTES\nsentinel = raster(paste0(ruta,\"sentinel_severino_red.tif\")) ## CAPA DE COBERTURA\ndem = raster(paste0(ruta,\"DEM_severino.tif\")) ## CAPA DE ASNM\nplot(lote[[3]])\n\n\n\npar(mfrow=c(1,3))\nplot(pt,main=\"pendientes\")\nplot(sentinel,\"cobertura\")\nplot(dem,main=\"asnm\")\n\n\n\n\nPara combinar rasters, utilizaremos la función stack(). En caso de que los archivos no coincidan pixel a pixel, nos devolverá un error. Previamente, verificaremos las dimensiones de cada imagen para evaluar si coinciden:\n\n#### Extensión de cada raster\n\nextent(dem)\n\nclass      : Extent \nxmin       : -65.19723 \nxmax       : -65.18861 \nymin       : -24.35386 \nymax       : -24.34362 \n\nextent(pt)\n\nclass      : Extent \nxmin       : -65.19723 \nxmax       : -65.18861 \nymin       : -24.35386 \nymax       : -24.34362 \n\nextent(sentinel)\n\nclass      : Extent \nxmin       : -65.19721 \nxmax       : -65.18858 \nymin       : -24.35369 \nymax       : -24.34372 \n\n## Comparación general ##\nany(\n  c(extent(dem)!=extent(pt),\n    extent(dem)!=extent(sentinel),\n    extent(pt)!=extent(sentinel)\n    )\n)\n\n[1] TRUE\n\n\nCorroboramos que las dimensiones no son exactamente iguales. Vamos a “rectificar” las imágenes utilizando la función resample():\n\ndem = resample(dem, sentinel)\npt = resample(pt, sentinel, method='ngb')\nextent(dem)\n\nclass      : Extent \nxmin       : -65.19721 \nxmax       : -65.18858 \nymin       : -24.35369 \nymax       : -24.34372 \n\nextent(pt)\n\nclass      : Extent \nxmin       : -65.19721 \nxmax       : -65.18858 \nymin       : -24.35369 \nymax       : -24.34372 \n\nextent(sentinel)\n\nclass      : Extent \nxmin       : -65.19721 \nxmax       : -65.18858 \nymin       : -24.35369 \nymax       : -24.34372 \n\nany(\n  c(extent(dem)!=extent(pt),\n    extent(dem)!=extent(sentinel),\n    extent(pt)!=extent(sentinel)\n    )\n)\n\n[1] FALSE\n\n\nAhora, las imagenes coinciden. Estamos en condiciones de “apilarlas” con la función stack(). Luego, ejecutaremos una serie de funciones a fin de obtener la información con formato de un data frame o tabla de datos.\n\n####Apilamiento\nr.stack = stack(dem,pt,sentinel)\nnames(r.stack) = c('dem', 'pt', 'sentinel')\n\n# Cargar raster stack en la memoria para un remuestreo más rápido\nr.stack = readAll(r.stack)\n\n#### Gráfico del stack\nplot(r.stack)\n\n\n\n## CONVERTIR EL STACK EN DATA FRAME (tabla de datos)\ns = rasterToPoints(r.stack, spatial=TRUE)"
+  },
+  {
+    "objectID": "05_Etapa_5.html#hclc",
+    "href": "05_Etapa_5.html#hclc",
+    "title": "Muestreo Hipercubo Latino Condicionado, utilizando el programa R.",
+    "section": "HCLc",
+    "text": "HCLc\nSupongamos que se debe realizar un muestreo de tamaño 5. Suele ser práctico aumentar el número del tamaño muestral, en este caso, por ejemplo lo podemos aumentar a 10. Luego, con la función clhs realizaremos i = 500 iteraciones o ciclos de muestreos de Montecarlo, para definir la mejor asignación de los puntos muestrales en el terreno.\nLuego, se extraen los índices u ordenamiento de los puntos seleccionados entre todos los simulados, y lo almacenaremos en una tabla a la que podemos llamar filtro.\nFinalmente, ajustaremos los campos de coordenadas x e y, y lo exportaremos a la carpeta de trabajo como un archivo .csv.\n\n## CLHS ####\n\ntamañoMuestral = 10\n\ns.clhs = clhs(s, \n              size = tamañoMuestral, \n              progress = FALSE, \n              iter = 500, \n              simple = FALSE)\n\nplot(s.clhs, mode=c(\"obj\", \"box\"))\n\n\n\n## EXTRAER INDICES Y PLOTEO DE PUNTOS####\nsubset.idx = s.clhs$index_samples\nfiltro=s[subset.idx, ]\nfiltro.df=as.data.frame(filtro@coords)\n\n#### PLOT ####\nggplot()+\n  geom_sf(data=lote,\n          color=\"black\",\n          fill=\"darkcyan\",\n          alpha=0.2,\n          size=1)+\n  geom_point(data=filtro.df,aes(x=x,y=y),\n             color=\"darkorange\",\n             fill=\"darkorange\",\n             size=2)\n\n\n\n\nLa exportación se puede realizar de la siguiente manera:\n\nwrite.csv2(filtro.df,\n           file = paste0(ruta,\"lote.puntosMuestrales.csv\"))"
+  },
+  {
+    "objectID": "07_Recursos.html",
+    "href": "07_Recursos.html",
+    "title": "Recursos",
+    "section": "",
+    "text": "Bruce, D. (2023). Spatial sampling with R. Primera Edición. CRC Press. Nueva York. Versión digital libre en https://dickbrus.github.io/SpatialSamplingwithR/\nGoogle Earth Engine desde cero\nMalone, B. et al (2019). Some methods to improve the utility of conditioned Latin hypercube sampling. PeerJ. 2019 Feb 25;7:e6451\nPaccioreti, P. et al (2020). Muestreo de sitios a escala regional para mapeo digital basado en propiedades del suelo. Ciencias del Suelo (Argentina) 38 (2): 1-320, 2020."
+  },
+  {
+    "objectID": "07_Recursos.html#recursos-sugeridos",
+    "href": "07_Recursos.html#recursos-sugeridos",
+    "title": "Recursos",
+    "section": "",
+    "text": "Bruce, D. (2023). Spatial sampling with R. Primera Edición. CRC Press. Nueva York. Versión digital libre en https://dickbrus.github.io/SpatialSamplingwithR/\nGoogle Earth Engine desde cero\nMalone, B. et al (2019). Some methods to improve the utility of conditioned Latin hypercube sampling. PeerJ. 2019 Feb 25;7:e6451\nPaccioreti, P. et al (2020). Muestreo de sitios a escala regional para mapeo digital basado en propiedades del suelo. Ciencias del Suelo (Argentina) 38 (2): 1-320, 2020."
+  }
+]

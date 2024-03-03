@@ -1,0 +1,55 @@
+---
+title: "Muestreo espacial: Hipercubo Latino condicionado"
+subtitle: "Curso Herramientas estadísticas para el diseño muestral de un inventario forestal."
+---
+
+Este recurso constituye la actividad propuesta del último módulo del Curso de Extensión **"Herramientas estadísticas para el diseño muestral de un inventario forestal"**, aprobado por Resolución CAFCA N 929/2023, dictado durante los meses de noviembre y diciembre de 2023 en la Facultad de Ciencias Agrarias de la Universidad Nacional de Jujuy.
+
+## Objetivos
+
+-   Obtener capas raster de ejemplo para la construcción de una capa estratificada de base para el muestreo.
+
+-   Realizar un muestreo de tipo *Hipercubo latino condicionado* (HCLc) con un tamaño muestral pre-definido para el macizo boscoso de la Finca Severino, de la FCA UNJu.
+
+-   Visualizar los puntos muestrales en una composición.
+
+::: callout-warning
+## Nota
+
+Esta clase trata de desarrollar un ejemplo de aplicación de muestreo espacial HCLc mediante el uso combinado de diferentes herramientas de análisis. **No** constituye un tratamiento formal y en profundidad de los conceptos que subyacen en cada uno de los métodos aplicados.
+
+:::
+
+## Plataformas
+
+Para realizar la actividad se utilizarán **tres plataformas** de código libre y gratuitas:
+
+-   **QGIS 3**, cuya versión más reciente es la 3.36, descargable desde [aquí](https://www.qgis.org/en/site/forusers/download.html).
+
+-   **R**, cuya versión más reciente es la 4.3.3, descargable desde [aquí](https://cran.r-project.org/bin/windows/base/).
+
+-   **Google Earth Engine (GEE)**, accesible desde [aquí](https://earthengine.google.com/).
+
+## Etapas
+
+La actividad consta de las siguientes etapas:
+
+1.  Creación de una carpeta de trabajo y creación de un proyecto QGIS.
+
+2.  Descarga de una capa DEM (Modelo Digital de Elevación) de tipo ráster desde [*IDERA*](https://www.ign.gob.ar/NuestrasActividades/Geodesia/ModeloDigitalElevaciones/Busqueda), a partir de la cual se construirán dos capas bases: curvas de nivel y pendientes, utilizando el programa QGIS.
+
+3.  Obtención de una capa raster de cobertura, a partir de una composición especificada desde GEE.
+
+4.  Delimitación de las capas bases con el lote a muestrear.
+
+5.  "Apilamiento" de las capas bases y muestreo Hipercubo Latino, utilizando el programa R.
+
+6.  Visualización de los puntos muestrales en el programa QGIS.
+
+## Responsables
+
+-   Ing. Agr. Juan Manuel Solís, juanmasolis\@fca.unju.edu.ar
+
+-   Dr. Cristian Humano, cahumano\@fca.unju.edu.ar
+
+-   Ing. Forestal Julián Quispe, quispejulian\@fca.unju.edu.ar

@@ -1,0 +1,102 @@
+---
+title: Obtención de una capa raster de cobertura a partir de GEE.
+---
+
+## Primeros pasos
+
+Google Earth Engine (GEE) es una plataforma en la nube desarrollada por Google que proporciona acceso y capacidades de análisis para vastas cantidades de datos geoespaciales y de teledetección, que utiliza un lenguaje de programación propio llamado "Earth Engine JavaScript API".
+
+Para poder acceder al entorno de trabajo de GEE, en el menú **Platform** del ([sitio web de la aplicación](https://earthengine.google.com/)), seleccionar **Code editor**. Se le pedirá que elija una cuenta de Google para registrarse y ... listo! ya ha accedido al editor de código de GEE.
+
+No es propósito de este curso profundizar sobre GEE. Sin embargo, quienes estén interesados en introducirse en esta poderosa plataforma, se recomienda enfáticamente el curso [Google Earth Engine desde cero](https://yabellini.github.io/GEE_course_code/index.html), de Yanina Bellini Saibene (2022).
+
+En el panel **Script Manager**, al que se acceder desde la solapa **Scripts** (arriba a la derecha), crearemos un nuevo proyecto al que llamaremos **HCL**, presionando el botón rojo **NEW \>\> Repository** e ingresando el valor **HCL** en la casilla correspondiente. Luego, presionar **Create**. Aparecerá el nombre del repositorio recientemente creado como una dependencia dentro de **Owner**. A continuación, crearemos un nuevo archivo que contendrá las instrucciones para descargar una capa de cobertura. Para ello, habiendo seleccionado el repositorio **HCL**, seleccionaremos nuevamente **NEW**, esta vez seguido de la opción **File**, al que también llamaremos **HCL**. Luego, presionar **Ok**.
+
+## Descarga de una capa raster vectorial
+
+Dentro del archivo **HCL**, deberemos correr el siguiente código:
+
+::: {.callout-note icon="false"}
+## Código GEE
+
+// DEFINIR EL OBJETO poligono DE CORTE
+
+// 1. Carga de imagen Sentinel 2A
+
+
+var image = ee.ImageCollection('COPERNICUS/S2_SR')
+.filterDate('2020-01-01', '2023-12-11')
+
+
+.filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 1))
+
+
+.filterBounds(poligono)
+
+
+.median();
+
+// 2. Parámetros de visualización
+
+
+var visParamsTrue = {bands: ['B4', 'B3', 'B2'], min: 0, max: 2500, gamma: 1.1};
+
+
+Map.addLayer(image, visParamsTrue, "Sentinel 2A");
+
+
+Map.addLayer(image.clip(poligono), visParamsTrue, "StudyArea");
+
+
+Map.centerObject(poligono, 10);
+
+// 3. Exportación a Drive
+
+
+Export.image.toDrive({
+  image: image.int16(),
+  description: 'Sentinel2_30',
+  scale: 30,
+  region: poligono,
+  maxPixels: 1e13
+});
+
+:::
+
+### Descripción del código
+
+El código anterior realiza varias operaciones para trabajar con imágenes Sentinel-2A (con una resolución de 30m) y luego exportar la salida a una carpeta de Google Drive.
+
+#### Definir el objeto polígono de corte
+
+No forma parte del código propiamente dicho. Consiste en delimitar una región de análisis manualmente, de forma tal que dicha región contenga olgadamente al polígono de la Finca Severino. Una vez delimitado el polígono, lo llamaremos simplemente **polígono**.
+
+#### Carga de Imágenes Sentinel-2A:
+
+A continuación se describe la secuencia de sentencias empleadas para la carga de imágenes de Sentinel-2A:
+
+* Carga de banco de imágenes de contiene a la serie de Sentinel-2A del conjunto de datos 'COPERNICUS/S2_SR', con la función *ee.ImageCollection*.
+
+* Filtros de fecha ('2020-01-01' hasta '2023-12-11') y de porcentaje de píxeles nublados menor al 1% para seleccionar imágenes sin nubosidad.
+
+* Filtro de imágenes dentro del área definida por el objeto polígono.
+
+* Cálculo de la mediana de las imágenes seleccionadas para obtener una única imagen representativa.
+
+#### Visualización en el Mapa:
+
+* Definición de parámetros de visualización (visParamsTrue): selección de bandas RGB de la imagen Sentinel-2A, ajuste de luminosidad de la imagen con el argumento gamma, y los valores mínimos y máximos de las bandas de la imagen.
+
+* Adición de la imagen al mapa utilizando *Map.addLayer*, tanto a escala completa como recortada a la región definida por poligono.
+
+* Centrado del mapa en la región de interés (poligono) con un nivel de zoom de 10.
+
+#### Exportación a Google Drive:
+
+* Exportación de la imagen procesada a Google Drive utilizando *Export.image.toDrive*. 
+
+* La imagen se convierte a valores enteros (.int16()). Se especifica una descripción para el archivo de salida ('Sentinel2_30'), la escala de 30 metros por píxel, la región a exportar (poligono), y un límite máximo de píxeles (1e13).
+
+---
+
+{{< video https://youtu.be/Lpc4kxxqDK4 >}}

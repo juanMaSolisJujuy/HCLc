@@ -1,0 +1,27 @@
+---
+title: Descarga de una capa DEM (Modelo Digital de Elevación) 
+---
+
+## Archivos DEM
+
+Los archivos DEM o Modelos Digitales de Elevación, son archivos de tipo imagen con información acerca de la elevación de la superficie terrestre que permite describir la topografía del terreno a través de puntos distribuidos en forma homogénea sobre la superficie terrestre y cuya altura está referida al nivel medio del mar. 
+
+Estos archivos están están disponibles en diversos repositorios especializados. Por ejemplo, la plataforma de *Infraestructura de Datos Espaciales de la República Argentina* (IDERA) es una iniciativa que, desde 2007, busca coordinar y facilitar el acceso a datos geoespaciales en Argentina sobre la base de la cooperación y el servicio a la comunidad, y que está integrada, mediante una adhesión voluntaria, por los organismos de diferentes jurisdicciones (nacionales, provinciales y municipales), consejos federales, consejos o colegios profesionales, universidades, organismos no gubernamentales y empresas de todo el país.
+
+Los archivos DEM son imágenes que, en IDERA, presentan extendión *.img*, y constituyen archivos **ráster**, georeferenciados utilizado es el WGS84 - EPSG 4326.
+
+En IDERA, actualmente los DEM se presentan con diferentes resoluciones: 30m, 5m y 0,5m. Por ejemplo, en un DEM con resolución 30m, cada píxel representa un área de 30 x 30 m^2^.
+
+## Descarga
+
+Mediante las [Herramientas de Búsqueda](https://www.ign.gob.ar/NuestrasActividades/Geodesia/ModeloDigitalElevaciones/Busqueda) de IDERA, es posible realizar una búsqueda de archivos DEM por medio de una serie de filtros. En nuestro caso, vamos a realizar la siguiente secuencia de selección:
+
+1. Seleccionar la opción **PROVINCIA, DEPARTAMENTO / PARTIDO**.
+
+2. En **Provincia**, seleccionar **Jujuy**. En **Departamento**, seleccionar **EL CARMEN**. En **tipo de producto**, vamos a dejar seleccionada la opción **Todas**. Finalmente, copiar el código de seguridad en la caja correspondiente y presionar **Buscar**. 
+
+A continuación aparecerá un listado de archivos DEM disponibles con diferentes resoluciones. Cada archivo corresponde a un sector dentro del área filtrada en el paso anterior. Deberemos descargar el sector que coincida con la ubicación del predio de Finca Severino, que es el archivo **mdear_v2.1_30m** con el código **2566-11.img**, con una resolución de 30m.
+
+---
+
+{{< video https://youtu.be/gsSI0VEKUkE >}}

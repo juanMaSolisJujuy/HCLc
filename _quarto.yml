@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Muestreo Hipercubo Latino condicionado"
+  search: true
+  navbar:
+    logo: "./logofca.png"
+    left:
+      - href: index.qmd
+        text: Inicio
+      - text: Etapa 1
+        href: 01_Etapa_1.qmd
+      - text: Etapa 2
+        href: 02_Etapa_2.qmd
+      - text: Etapa 3
+        href: 03_Etapa_3.qmd
+      - text: Etapa 4
+        href: 04_Etapa_4.qmd
+      - text: Etapa 5
+        href: 05_Etapa_5.qmd
+      - text: Etapa 6
+        href: 06_Etapa_6.qmd
+      - text: Referencias
+        href: 07_Recursos.qmd
+
+format:
+  html:
+    theme: flatly
+    toc: true
+    toc_float: true
+    toc-location: left
+    toc-title: En esta página
+    toc-expand: true
+    embed-resources: true
+    smooth-scroll: true
+
+editor: source
+

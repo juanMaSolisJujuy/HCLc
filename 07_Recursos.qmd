@@ -1,0 +1,13 @@
+---
+title: Recursos
+---
+
+## Recursos sugeridos
+
+- Bruce, D. (2023). Spatial sampling with R. Primera Edición. CRC Press. Nueva York. Versión digital libre en [https://dickbrus.github.io/SpatialSamplingwithR/](https://dickbrus.github.io/SpatialSamplingwithR/)
+
+- [Google Earth Engine desde cero](https://yabellini.github.io/GEE_course_code/index.html)
+
+- Malone, B. *et al* (2019). Some methods to improve the utility of conditioned Latin hypercube sampling. [PeerJ. 2019 Feb 25;7:e6451](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6394343/)
+
+- Paccioreti, P. *et al* (2020). Muestreo de sitios a escala regional para mapeo digital basado en propiedades del suelo. Ciencias del Suelo (Argentina) 38 (2): 1-320, 2020.

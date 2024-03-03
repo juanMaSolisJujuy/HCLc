@@ -1,0 +1,7 @@
+---
+title: Visualización de los puntos muestrales en el programa QGIS.
+---
+
+---
+
+{{< video https://youtu.be/kCURKYu4dJ0  >}}

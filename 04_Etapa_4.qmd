@@ -1,0 +1,21 @@
+---
+title: Delimitación de las capas bases con el lote a muestrear.
+---
+
+## Unión de capas vectoriales del predio Severino
+
+Al importar el archivo **severino.kml** en QGIS, se importaron 3 capas: lotes, monte y represa. Es necesario combinar las tres capas a fin de obtener una única entidad. Para ello, seleccionar **Vectorial >> Herramientas de gestión de datos >> Combinar capas vectoriales**. Aparecerá la ventana *Combinar capas vectoriales*. Se debe pulsar el ícono de 3 puntos en **Capa de entrada** y seleccionar las tres capas espaciales, que están identificadas por el SRC EPSG 4326, y luego **Ejecutar**. En el panel de capas, aparecerá una nueva capa *temporal* con el nombre *Combinado*. La guardaremos en nuestra carpeta de trabajo de la siguiente manera: *seleccionar* la capa "Combinado" haciendo un click sobre ella en el panel de capas. Sin deseleccionar la capa, en el menú superior **Capa** seleccionar **Guardar como**. Seleccionar el formato **kml**, y en **nombre del archivo**, seleccionar la **ubicación en el directorio** y el nombre del polígono, por ejemplo, **severino_lote.kml**. Luego **Aceptar** y **Añadir capas**.
+
+## Corte de capas raster que serán "apiladas".
+
+Realizaremos la importación de las dos capas raster obtenidas hasta ahora: el archivo **2566-11.zip** (con el DEM obtenido de IDERA) y el archivo **Severino_Sentinel2_30.tif**, obtenido de GEE. En ambos casos, seleccionar **Capa >> Añadir capa >> Añadir capa raster**. En la ventana *Administrador de fuentes de datos | Raster*, hacer click en el ícono de **Fuente** y seleccionar el primer archivo. A continuación, repetir el procedimiento, seleccionado el segundo archivo. 
+
+Para realizar el "corte" de la capa DEM, seleccionar **Ráster >> Extracción >> Cortar ráster por capa de máscara...** En la capa de entrada, seleccionar la capa ráster **2566-11.img**. En la capa de máscara, seleccionar el polígono **severino_completo**. Luego **Ejecutar**. Aparecerá una capa *temporal* llamada **Cortado (máscara)**, que deberemos guardar en la carpeta de trabajo, por ejemplo, con el nombre **DEM_severino.tif**. Luego repetir el procedimiento con la otra capa ráster, nombrándola **sentinel_severino.tif**.
+
+## Creación de capa de pendientes.
+
+Para la extracción de pendientes, seleccionar **Ráster >> Análisis >> Pendiente**. En **Capa de entrada** seleccionar la capa **DEM_severino**, y las opciones **Pendiente expresada en porcentaje en vez de grados** y **procesar border**. Aparecerá una capa *temporal* que deberemos guardar en la carpeta de trabajo según se vió anteriormente, por ejemplo con el nombre **pt_severino.tif**.
+
+---
+
+{{< video https://youtu.be/wPjPxlLVpu8  >}}

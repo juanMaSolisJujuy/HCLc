@@ -1,0 +1,197 @@
+---
+title: Muestreo Hipercubo Latino Condicionado, utilizando el programa R.
+---
+
+## Muestreo espacial Hipercubo Latino
+
+El muestreo hipercubo latino condicional HCLc es un tipo de muestreo espacial estratificado que utiliza diferentes variables auxiliares para obtener una distribución más eficiente y representativa de los puntos muestrales, ya que permite capturar la variabilidad del entorno que se está relevando. El muestreo HCLc es de tipo **dirijido**, es decir, no es un muestreo probabilístico ya que no se conoce a priori la probabilidad de selección de los puntos muestrales. Dados N sitios con información multidimensional, HCLc selecciona una muestra tal que existan representantes de todos los intervalos de clase de las distribuciones marginales que componen la distribución multivariada (Minasny & McBratney, 2006, citado por Paccioretti *et al*, 2020).
+
+Para ejemplificar el modelo, supongamos que contamos con **dos variables auxiliares** o estratos que, a fin de simplificar, presentan cuatro niveles o valores cada uno. El procedimiento de asignación de puntos muestrales se realiza de forma tal que **a cada intersección del diseño 4x4 corresponde una única observación**, de forma tal que todos los niveles están marginalmente representados. El ejemplo descrito corresponde a un **cuadrado latino**, ya que contiene **dos** dimensiones. 
+
+```{r echo=FALSE}
+
+x = c(0.5, 1.5, 2.5, 3.5)
+y = c(3.5, 2.5, 0.5, 1.5)
+plot(x,
+     y,
+     pch = 16,
+     xaxt = "none",
+     yaxt = "none",
+     axes = FALSE,
+     ylim = c(0,4),
+     xlim = c(0.1,3.9))
+abline(
+  h = 0:4,
+  v = 0:4
+)
+
+```
+
+
+El término **hipercubo latino** es una extensión del diseño **cuadrado latino** a más dimensiones. HCLc, es un esquema de muestreo de Monte Carlo que utiliza un procedimiento aleatorio estratificado que proporciona una forma eficiente de muestrear variables de sus distribuciones multivariadas (McKay et al., 1979). Es la generalización de este concepto a un número arbitrario de dimensiones (K), donde cada unidad de muestreo es la única en cada hiperplano alineado con el eje que la contiene. Implica muestrear *n* valores de la distribución prescrita para cada una de las variables. La distribución acumulativa de cada variable se divide en *n* intervalos equiprobables, y se selecciona aleatoriamente un valor de cada intervalo. Los *n* valores obtenidos para cada variable se emparejan luego con las otras variables. 
+
+## Apilamiento o "stacks" de capas
+
+En esta etapa vamos a trabajar con **R**. Previamente vamos instalar las librerías que utilizaremos:
+
+```{r eval=FALSE}
+
+install.packages("sf")
+install.packages("rgdal")
+install.packages("raster")
+install.packages("clhs")
+install.packages("tidyverse")
+
+```
+
+Recordar que la instalación de librerías se realiza solo **una vez**. Una vez instaladas, es posible utilizar sus funciones invocándolas con la función **library():**
+
+```{r message=FALSE, warning=FALSE}
+
+library(sf)
+library(rgdal)
+library(raster)
+library(clhs)
+library(tidyverse)
+
+```
+
+Una práctica muy útil suele ser guardar la referencia de la ruta de trabajo para facilitar las referencias. Por ejemplo:
+
+```{r message=FALSE, warning=FALSE}
+
+ruta = "C:/Users/usuario/Documents/HCL/CAPAS/"
+
+```
+
+De esta forma, ya sabemos que al utilizar la referencia "ruta", se hace referencia a la sub-carpeta "CAPAS" de la carpeta "HCL".
+
+El primer paso será cargar el polígono del predio de la finca Severino, como así también las capas raster.
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+
+lote=st_read(paste0(ruta,"severino_lote.kml"))
+pt = raster(paste0(ruta,"pt_severino.tif")) ## CAPA DE PENDIENTES
+sentinel = raster(paste0(ruta,"sentinel_severino_red.tif")) ## CAPA DE COBERTURA
+dem = raster(paste0(ruta,"DEM_severino.tif")) ## CAPA DE ASNM
+plot(lote[[3]])
+par(mfrow=c(1,3))
+plot(pt,main="pendientes")
+plot(sentinel,"cobertura")
+plot(dem,main="asnm")
+
+```
+
+Para **combinar rasters**, utilizaremos la función **stack()**. En caso de que los archivos no coincidan pixel a pixel, nos devolverá un error. Previamente, verificaremos las dimensiones de cada imagen para evaluar si coinciden:
+
+```{r message=FALSE, warning=FALSE}
+
+#### Extensión de cada raster
+
+extent(dem)
+extent(pt)
+extent(sentinel)
+
+## Comparación general ##
+any(
+  c(extent(dem)!=extent(pt),
+    extent(dem)!=extent(sentinel),
+    extent(pt)!=extent(sentinel)
+    )
+)
+
+```
+
+Corroboramos que las dimensiones no son exactamente iguales. Vamos a "rectificar" las imágenes utilizando la función **resample()**:
+
+```{r message=FALSE, warning=FALSE}
+
+dem = resample(dem, sentinel)
+pt = resample(pt, sentinel, method='ngb')
+extent(dem)
+extent(pt)
+extent(sentinel)
+any(
+  c(extent(dem)!=extent(pt),
+    extent(dem)!=extent(sentinel),
+    extent(pt)!=extent(sentinel)
+    )
+)
+
+```
+
+Ahora, las imagenes coinciden. Estamos en condiciones de "apilarlas" con la función **stack()**. Luego, ejecutaremos una serie de funciones a fin de obtener la información con formato de un data frame o tabla de datos.
+
+```{r message=FALSE, warning=FALSE}
+
+####Apilamiento
+r.stack = stack(dem,pt,sentinel)
+names(r.stack) = c('dem', 'pt', 'sentinel')
+
+# Cargar raster stack en la memoria para un remuestreo más rápido
+r.stack = readAll(r.stack)
+
+#### Gráfico del stack
+plot(r.stack)
+
+## CONVERTIR EL STACK EN DATA FRAME (tabla de datos)
+s = rasterToPoints(r.stack, spatial=TRUE)
+
+```
+
+
+## HCLc
+
+Supongamos que se debe realizar un muestreo de tamaño 5. Suele ser práctico aumentar el número del tamaño muestral, en este caso, por ejemplo lo podemos aumentar a 10. Luego, con la función clhs realizaremos i = 500 iteraciones o ciclos de muestreos de Montecarlo, para definir la mejor asignación de los puntos muestrales en el terreno.
+
+Luego, se extraen los índices u ordenamiento de los puntos seleccionados entre todos los simulados, y lo almacenaremos en una tabla a la que podemos llamar *filtro*. 
+
+Finalmente, ajustaremos los campos de coordenadas x e y, y lo exportaremos a la carpeta de trabajo como un archivo **.csv**.
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+
+## CLHS ####
+
+tamañoMuestral = 10
+
+s.clhs = clhs(s, 
+              size = tamañoMuestral, 
+              progress = FALSE, 
+              iter = 500, 
+              simple = FALSE)
+
+plot(s.clhs, mode=c("obj", "box"))
+
+## EXTRAER INDICES Y PLOTEO DE PUNTOS####
+subset.idx = s.clhs$index_samples
+filtro=s[subset.idx, ]
+filtro.df=as.data.frame(filtro@coords)
+
+#### PLOT ####
+ggplot()+
+  geom_sf(data=lote,
+          color="black",
+          fill="darkcyan",
+          alpha=0.2,
+          size=1)+
+  geom_point(data=filtro.df,aes(x=x,y=y),
+             color="darkorange",
+             fill="darkorange",
+             size=2)
+
+
+```
+
+La exportación se puede realizar de la siguiente manera:
+
+```{r eval=FALSE,message=FALSE, warning=FALSE, results='hide'}
+
+write.csv2(filtro.df,
+           file = paste0(ruta,"lote.puntosMuestrales.csv"))
+
+
+```
+
+---
+
+{{< video https://youtu.be/m3XuRI1eXsk >}}

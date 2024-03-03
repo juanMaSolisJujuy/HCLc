@@ -1,0 +1,23 @@
+---
+title: Primeros Pasos
+---
+
+## Creación de la carpeta de Trabajo
+
+En todo proyecto que se inicie, es recomendable crear una carpeta de trabajo a fin de incluir en ella todos los archivos que serán utilizados. De esta forma se llevará un mejor control del proyecto, además de que se simplificarán muchas de las operaciones que se realicen. Por ejemplo, en la carpeta *Documentos* (usualmente dentro de la ruta *C:/Users/usuario*) crearemos la carpeta **HCL**. En ella guardaremos todos los archivos que utilicemos en el proyecto. Por ejemplo, dentro de **HCL** podemos crear una nueva carpeta llamada **CAPAS**, dentro de la cual iremos guardando todos los archivos vectoriales y raster. Inicialmente, guardaremos el archivo vectorial **severino.kml**, que contiene un polígono con los límites del predio de la Finca Severino.
+
+## Creación del Proyecto QGIS
+
+Una vez creada la carpeta de Trabajo, abriremos el programa QGIS 3 y crearemos el proyecto de trabajo. Básicamente, un proyecto QGIS en un archivo con extensión **.qgs** que almacena **referencias**, **ajustes** y diferentes **configuraciones** sobre mapas creados con QGIS.
+
+Para ello, en el menú **Proyecto** seleccionaremos la opción **Nuevo**, y se abrirá un entorno nuevo o lienzo (canvas) en blanco. Antes de comenzar a trabajar, es necesario guardarlo en la carpeta de trabajo. Seleccionar **Proyectos** y luego **Guardar como ...**, seleccionar la carpeta de trabajo recientemente creada, asignarle el nombre **HCL** (o el que se prefiera), y presionar **Guardar**.
+
+Ahora es posible comenzar a importar archivos y trabajar con ellos. Por ejemplo, para importar el archivo **severino.kml**, se debe seleccionar **Capa \>\> Añadir capa \>\> Añadir capa vectorial ...**, y aparecerá la ventana emergente **Administrador de fuentes de datos \| Vector**. En el selector **Fuente** seleccionar el ícono para abrir (indicado con tres puntos), buscar el archivo en nuestra carpeta de trabajo y seleccionarlo. Aparecerá una nueva ventana llamada **Select items to add**. Seleccionar las opciones **Seleccionar todo** y luego **Añadir capas**. Finalmente, presionar **Cerrar**.
+
+En la esquina inferior derecha se puede observar que el sistema de referencias es el EPSG 4326.
+
+Con el complemento **QuickMapServices** es posible añadir una capa base de diferentes proveedores, como ser Google Maps.
+
+------------------------------------------------------------------------
+
+{{< video https://www.youtube.com/watch?v=MWV87GWPf70 >}}
